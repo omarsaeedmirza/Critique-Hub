@@ -1,11 +1,12 @@
-
+from .views import MovieViewSet, RatingViewSet, UserViewSet
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include
-from rest_framework.authtoken.views import obtain_auth_token
-
+from rest_framework import routers
+from django.urls import include
+router = routers.DefaultRouter()
+router.register('movies', MovieViewSet)
+router.register('ratings', RatingViewSet)
+router.register('users', UserViewSet)
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('API/', include('API.urls')),
-    path('auth/', obtain_auth_token ),
+    path('', include(router.urls)),
 ]
